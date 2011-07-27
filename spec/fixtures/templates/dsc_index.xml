@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<templates>
+  <template>
+    <name>Linux /var/log</name>
+    <path>os/linux/linux-varlog</path>
+    <description>Monitor log files in /var/log</description>
+    <questions>
+      <question>
+        <name>log-ignore</name>
+        <text>Regular Expression for lines to ignore (warning: given text must be a valid regular expression)</text>
+        <default>peer died</default>
+      </question>
+      <question>
+        <name>log-crit</name>
+        <text>Regular Expression for lines that are Critical alerts (warning: given text must be a valid regular expression)</text>
+        <default>SERIOUS|vx_nospace|EMS|Error|Critical|Failure</default>
+      </question>
+      <question>
+        <name>log-warn</name>
+        <text>Regular Expression for lines that are Warning alerts (warning: given text must be a valid regular expression)</text>
+        <default>Link Down</default>
+      </question>
+    </questions>
+  </template>
+  <template>
+    <name>Linux Core</name>
+    <path>os/linux/linux-core</path>
+    <description>CPU and other general Linux metrics</description>
+    <max-associations-per-configuration>1</max-associations-per-configuration>
+    <questions>
+      <question>
+        <name>cpu-minutes</name>
+        <text>Minimum time CPU usage must exceed threshold before alertable (in minutes)</text>
+        <validation-regex>^\d+$</validation-regex>
+        <default>15</default>
+      </question>
+      <question>
+        <name>cpu-crit</name>
+        <text>Critical CPU Percentage (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>99.0</default>
+      </question>
+      <question>
+        <name>cpu-warn</name>
+        <text>Warning CPU Percentage (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>98.0</default>
+      </question>
+      <question>
+        <name>runq-size-alert-onoff</name>
+        <text>Enable alerting for run queue size</text>
+        <choices>
+          <choice value="0">No</choice>
+          <choice value="1">Yes</choice>
+        </choices>
+        <hidden>true</hidden>
+      </question>
+      <question>
+        <name>cpu-load-alert-onoff</name>
+        <text>Enable alerting for the 5 minute load average</text>
+        <choices>
+          <choice value="0">No</choice>
+          <choice value="1">Yes</choice>
+        </choices>
+      </question>
+      <question>
+        <name>cpu-load-warn</name>
+        <text>Warning Load Average (if enabled) (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>4</default>
+      </question>
+      <question>
+        <name>cpu-load-crit</name>
+        <text>Critical Load Average (if enabled) (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>6</default>
+      </question>
+    </questions>
+  </template>
+  <template>
+    <name>Linux Disk</name>
+    <path>os/linux/linux-disk</path>
+    <description>Disk utilitization metrics</description>
+    <max-associations-per-configuration>1</max-associations-per-configuration>
+    <questions>
+      <question>
+        <name>disk-minutes</name>
+        <text>Minimum time Disk utilitization must exceed threshold before alertable (in minutes)</text>
+        <validation-regex>^\d+$</validation-regex>
+        <default>15</default>
+      </question>
+      <question>
+        <name>disk-crit</name>
+        <text>Critical Disk Utilization Percentage (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>95.0</default>
+      </question>
+      <question>
+        <name>disk-warn</name>
+        <text>Warning Disk Utilization Percentage (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>90.0</default>
+      </question>
+      <question>
+        <name>linux-disk-ignore</name>
+        <text>Devices within /dev to Ignore (warning: the regular expression you give must be valid or no disk devices will be ignored)</text>
+        <validation-regex>.*</validation-regex>
+        <default>(tap.*)</default>
+      </question>
+    </questions>
+  </template>
+  <template>
+    <name>Linux Network</name>
+    <path>os/linux/linux-network</path>
+    <description>Linux Network Related Metrics</description>
+    <max-associations-per-configuration>1</max-associations-per-configuration>
+    <questions>
+      <question>
+        <name>total-bandwidth</name>
+        <text>Network Bandwidth available in bytes:</text>
+        <validation-regex>^\d+$</validation-regex>
+        <default>1250000</default>
+      </question>
+    </questions>
+  </template>
+  <template>
+    <name>Linux Memory</name>
+    <path>os/linux/linux-memory</path>
+    <description>Linux memory metrics</description>
+    <max-associations-per-configuration>1</max-associations-per-configuration>
+    <questions>
+      <question>
+        <name>swap-alert-type</name>
+        <text>Which set of thresholds should be used to alert on Swap Space</text>
+        <choices>
+          <choice value="0">Available Megabytes</choice>
+          <choice value="1">Percent Free</choice>
+        </choices>
+      </question>
+      <question>
+        <name>swap-crit</name>
+        <text>Critical: Available Swap Space (in megabytes) (less than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>256</default>
+      </question>
+      <question>
+        <name>swap-warn</name>
+        <text>Warning: Available Swap Space (in megabytes) (less than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>512</default>
+      </question>
+      <question>
+        <name>swap-pct-crit</name>
+        <text>Critical: Available Swap Space (percent free) (less than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>25.0</default>
+      </question>
+      <question>
+        <name>swap-pct-warn</name>
+        <text>Warning: Available Swap Space (percent free) (less than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>35.0</default>
+      </question>
+      <question>
+        <name>memory-minutes</name>
+        <text>Minimum time Memory usage must exceed threshold before alertable (in minutes)</text>
+        <validation-regex>^\d+$</validation-regex>
+        <default>15</default>
+      </question>
+      <question>
+        <name>free-buff-crit</name>
+        <text>Critical: Available Memory Buffers in MB (current buffer space must fall below given threshold and used swap space must exceed threshold from the question below before alertable)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>32</default>
+      </question>
+      <question>
+        <name>swap-used-crit</name>
+        <text>Critical: Used Swap Space in MB (used swap space must exceed threshold and buffer space must fall below threshold from above question before alertable)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>200</default>
+      </question>
+    </questions>
+  </template>
+  <template>
+    <name>Linux File System</name>
+    <path>os/linux/linux-filesystem</path>
+    <description>Disk Space and I-Node Space Metrics</description>
+    <max-associations-per-configuration>1</max-associations-per-configuration>
+    <questions>
+      <question>
+        <name>fs-crit</name>
+        <text>Critical File System Percent Used (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>98.0</default>
+      </question>
+      <question>
+        <name>fs-warn</name>
+        <text>Warning File System Percent Used (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>98.0</default>
+      </question>
+      <question>
+        <name>inode-crit</name>
+        <text>Critical I-Node Percent Used (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>98.0</default>
+      </question>
+      <question>
+        <name>inode-warn</name>
+        <text>Warning I-Node Percent Used (greater than or equal to)</text>
+        <validation-regex>^[\d.]+$</validation-regex>
+        <default>90.0</default>
+      </question>
+      <question>
+        <name>linux-filesystem-ignore</name>
+        <text>File Systems to ignore (warning: the regular expression you give must be valid or no file systems will be ignored)</text>
+        <validation-regex>.*</validation-regex>
+        <default>Filesystem\|/(dev|proc|mnt/cdrom|cdrom)</default>
+      </question>
+    </questions>
+  </template>
+  <template>
+    <name>Linux Users</name>
+    <path>os/linux/linux-users</path>
+    <description>Metrics relating to the current number of users</description>
+    <max-associations-per-configuration>1</max-associations-per-configuration>
+  </template>
+  <template>
+    <name>Restricted Clients</name>
+    <path>restricted-clients</path>
+    <description>This template has a client restriction</description>
+    <restricted-clients>
+      <client>API</client>
+      <client>SSBE</client>
+    </restricted-clients>
+  </template>
+  <template>
+    <name>Restricted Platforms</name>
+    <path>restricted-platforms</path>
+    <description>This template has a platform restriction</description>
+    <restricted-platforms>
+      <platform>Linux</platform>
+      <platform>Solaris</platform>
+    </restricted-platforms>
+  </template>
+</templates>
