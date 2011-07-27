@@ -66,6 +66,7 @@ module DataMapper
       def template_from_xml(xml, query)
         template = Template.new(:name =>        text_for_elem(xml, 'name'),
                                 :description => text_for_elem(xml, 'description'),
+                                :order =>       text_for_elem(xml, 'order'),
                                 :path =>        text_for_elem(xml, 'path'),
                                 :max_associations_per_configuration => text_for_elem(xml, 'max-associations-per-configuration'),
                                 :restricted_clients => arr_from_elem(xml, 'restricted-clients', 'client'),
