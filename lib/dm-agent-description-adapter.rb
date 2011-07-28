@@ -66,7 +66,6 @@ module DataMapper
       def template_from_xml(xml, query)
         template = Template.new(:name =>        text_for_elem(xml, 'name'),
                                 :description => text_for_elem(xml, 'description'),
-                                :order =>       text_for_elem(xml, 'order'),
                                 :path =>        text_for_elem(xml, 'path'),
                                 :max_associations_per_configuration => text_for_elem(xml, 'max-associations-per-configuration'),
                                 :restricted_clients => arr_from_elem(xml, 'restricted-clients', 'client'),
@@ -91,6 +90,7 @@ module DataMapper
       def question_from_xml(xml)
         Question.new(:name =>             text_for_elem(xml, 'name'),
                      :text =>             text_for_elem(xml, 'text'),
+                     :order =>            text_for_elem(xml, 'order'),
                      :validation_regex => text_for_elem(xml, 'validation-regex'),
                      :default =>          text_for_elem(xml, 'default'),
                      :hidden =>           text_for_elem(xml, 'hidden') == 'true',
