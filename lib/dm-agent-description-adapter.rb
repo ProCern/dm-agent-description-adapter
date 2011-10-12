@@ -12,18 +12,28 @@ module DataMapper
     class AgentDescriptionAdapter < AbstractAdapter
 
       attr_accessor :agent_index
+      attr_accessor :index_doc
+      attr_accessor :index_time
 
       def initialize(name, uri_or_options)
         super
 
         @agent_index = uri_or_options[:agent_template_index].to_s
         @parsing_xml_time = 0
+        read_index
       end
 
-      def index_xml
+      def read_index
         File.open(@agent_index) do |f|
-          Nokogiri::XML.parse(f)
+	  @index_time = File.mtime(@agent_index)
+          @index_doc = Nokogiri::XML.parse(f)
         end
+      end
+
+
+      def index_xml
+        read_index if File.mtime(@agent_index) != @index_time
+        @index_doc
       end
 
       def read_many(query)
